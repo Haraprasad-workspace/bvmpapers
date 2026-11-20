@@ -1,4 +1,4 @@
-import { getDisplayName, getSessionId } from './user.js';
+import { getSessionId } from './user.js';
 import { isSupabaseConfigured, supabase } from './supabase.js';
 
 const TOPIC = 'semester-5';
@@ -9,26 +9,14 @@ let sessionId = '';
 const subscribers = new Set();
 
 function readPresence() {
-  if (!channel) return { count: 0, names: [] };
+  if (!channel) return { count: 0 };
   const state = channel.presenceState();
   const sessions = Object.values(state).flat();
-  const byName = new Map();
-  for (const session of sessions) {
-    const displayName = typeof session.displayName === 'string' ? session.displayName.trim().slice(0, 24) : 'Anonymous';
-    const label = displayName || 'Anonymous';
-    const key = label.toLocaleLowerCase();
-    const group = byName.get(key);
-    if (group) group.count += 1;
-    else byName.set(key, { displayName: label, count: 1 });
-  }
-  return {
-    count: sessions.length,
-    names: [...byName.values()].sort((a, b) => a.displayName.localeCompare(b.displayName))
-  };
+  return { count: sessions.length };
 }
 
 function emit() {
-  const current = status === 'connected' ? readPresence() : { count: null, names: [] };
+  const current = status === 'connected' ? readPresence() : { count: null };
   for (const callback of subscribers) callback({ status, ...current });
 }
 
@@ -36,7 +24,6 @@ function trackProfile() {
   if (!channel || !active) return;
   channel.track({
     sessionId,
-    displayName: getDisplayName() || 'Anonymous',
     section: 'semester-5'
   }).then(({ error }) => {
     if (error) console.warn('Could not update BVM Papers presence.', error.message);
@@ -45,7 +32,7 @@ function trackProfile() {
 
 export function onPresenceChange(callback) {
   subscribers.add(callback);
-  const current = status === 'connected' ? readPresence() : { count: null, names: [] };
+  const current = status === 'connected' ? readPresence() : { count: null };
   callback({ status, ...current });
   return () => subscribers.delete(callback);
 }

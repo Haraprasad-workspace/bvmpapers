@@ -10,7 +10,7 @@ let presenceView = { status: 'connecting', count: null };
 
 function shell(content) {
   return `<div class="site-shell">
-    <header class="topbar"><a class="brand" href="#/" aria-label="BVM Papers home"><span class="brand-mark">B</span><span>BVM <span class="brand-light">Papers</span></span></a><div class="topbar-tools"><span class="topbar-note">A simpler way to find your papers</span><button class="name-change" type="button" data-change-name>Hi, ${esc(getDisplayName() || 'there')} <span aria-hidden="true">· Change</span></button></div></header>
+    <header class="topbar"><a class="brand" href="#/" aria-label="BVM Papers home"><span class="brand-mark">B</span><span>BVM <span class="brand-light">Papers</span></span></a><div class="topbar-tools"><span class="topbar-note">A simpler way to find your papers</span><button class="name-change" type="button" data-change-name>Change name</button></div></header>
     <main>${content}</main>
     <footer class="footer"><span>BVM Papers</span><span>Information Technology · Semester 5</span><button class="footer-name" type="button" data-change-name>Change display name</button></footer>
   </div>`;
@@ -35,7 +35,7 @@ function home(query = '') {
     <label class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><input id="subject-search" type="search" placeholder="Search subjects or codes" value="${esc(query)}" autocomplete="off" aria-label="Search subjects or codes"><kbd>/</kbd></label>
   </section>
   <section class="catalogue" aria-live="polite"><div class="section-heading"><div><p class="eyebrow">THE CATALOGUE</p><h2>Semester subjects</h2></div><span class="subject-total">${matches.length} subjects</span></div>
-    <div class="presence-strip" id="presence-room" data-status="${presenceView.status}" aria-live="polite"><span class="presence-light" aria-hidden="true"></span><div class="presence-copy"><strong id="presence-count"></strong><span id="presence-detail"></span></div><details class="presence-names" id="presence-names" hidden><summary>Who’s online</summary><div class="presence-name-list" id="presence-name-list"></div></details><span class="presence-tag">LIVE ROOM</span></div>
+    <div class="presence-strip" id="presence-room" data-status="${presenceView.status}" aria-live="polite"><span class="presence-light" aria-hidden="true"></span><div class="presence-copy"><strong id="presence-count"></strong><span id="presence-detail"></span></div><span class="presence-tag">LIVE ROOM</span></div>
     ${matches.length ? `<div class="subject-grid">${matches.map(subjectCard).join('')}</div>` : `<div class="empty-state"><span class="empty-icon">⌕</span><h3>No subjects found</h3><p>Try another subject name or code.</p></div>`}
   </section>`);
 }
@@ -78,32 +78,18 @@ function renderPresenceView() {
   room.dataset.status = presenceView.status;
   const count = room.querySelector('#presence-count');
   const detail = room.querySelector('#presence-detail');
-  const namesDisclosure = room.querySelector('#presence-names');
-  const namesList = room.querySelector('#presence-name-list');
   if (presenceView.status === 'connected' && Number.isFinite(presenceView.count)) {
     count.textContent = `${presenceView.count} ${presenceView.count === 1 ? 'student' : 'students'} online`;
     detail.textContent = 'Currently viewing Semester 5';
-    const names = presenceView.names || [];
-    namesList.replaceChildren();
-    for (const person of names) {
-      const chip = document.createElement('span');
-      chip.className = 'presence-name-chip';
-      chip.textContent = person.count > 1 ? `${person.displayName} · ${person.count} sessions` : person.displayName;
-      namesList.append(chip);
-    }
-    namesDisclosure.hidden = names.length === 0;
   } else if (presenceView.status === 'connecting') {
     count.textContent = 'Connecting to live count…';
     detail.textContent = 'Currently viewing Semester 5';
-    namesDisclosure.hidden = true;
   } else if (presenceView.status === 'disconnected') {
     count.textContent = 'Reconnecting to live count…';
     detail.textContent = 'The paper catalogue is still available';
-    namesDisclosure.hidden = true;
   } else {
     count.textContent = 'Live count unavailable';
     detail.textContent = 'The paper catalogue is still available';
-    namesDisclosure.hidden = true;
   }
 }
 

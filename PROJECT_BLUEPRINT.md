@@ -127,7 +127,7 @@ Keep the schema extensible to other departments and semesters without adding unn
 - On first visit, require a display name or an explicit Anonymous choice before entering the catalogue.
 - Store only the display label and its expiration timestamp in local storage for seven days; allow the visitor to change the label.
 - Use one Supabase Realtime Presence room named `semester-5` for the whole Semester 5 area. Track a unique browser-session ID and display name; derive the online session count from Presence state.
-- Presence is ephemeral, not an attendance record or verified student identity. Show the approximate session count and an expandable list of display names; group duplicate names. These names are public to clients in the room. Do not collect or expose sensitive personal information or store Presence in an application table.
+- Presence is ephemeral, not an attendance record or verified student identity. Show only the approximate session count. Keep display names in each visitor's local browser; do not send them through Presence or expose them to other visitors. Do not collect or expose sensitive personal information or store Presence in an application table.
 - Configure the client only with `VITE_SUPABASE_URL` and a public publishable/anon key. Never expose a service-role/secret key.
 - Use a private Realtime channel and narrowly scoped policies for anonymous Presence read/publish on the exact `semester-5` topic. If no credentials or project authorization are configured, the catalogue and PDF actions still work and the live count shows unavailable.
 - See `supabase/realtime-presence.sql` and `README.md` for Supabase setup, public-room limitations, and required environment variables.

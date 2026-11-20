@@ -31,7 +31,7 @@ Despite the variable name, Supabase's newer `sb_publishable_...` key may be used
 3. Run [`supabase/realtime-presence.sql`](supabase/realtime-presence.sql) in the Supabase SQL Editor. It grants only anonymous Presence read and publish access for the exact `semester-5` topic. It creates no tables and does not allow Broadcast.
 4. Set the environment variables above and restart Vite.
 
-This is intentionally a public anonymous room. Anyone who obtains the public site and key can join it, choose any display name, or create additional sessions. RLS narrows access to the single Presence topic, but without authentication Supabase cannot verify student identity or prevent a determined person from spoofing/automating sessions. The count is approximate active browser sessions, not attendance or unique students. The expandable online list groups identical display names and is visible to everyone in the room. Do not add personal or sensitive data to presence payloads.
+This is intentionally a public anonymous room. Anyone who obtains the public site and key can join it or create additional sessions. RLS narrows access to the single Presence topic, but without authentication Supabase cannot verify student identity or prevent a determined person from spoofing/automating sessions. The count is approximate active browser sessions, not attendance or unique students. Display names are stored only in each visitor's local browser and are not shared through Presence. Do not add personal or sensitive data to presence payloads.
 
 ## Add a paper
 

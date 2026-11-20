@@ -6,12 +6,7 @@
       "id": "open-elective",
       "code": "",
       "name": "Open Elective – I",
-      "papers": [
-        { "id": "open-elective-W-2025", "year": 2025, "session": "Winter", "file": "/papers/open-elective/winter-2025.pdf", "fileSize": null },
-        { "id": "open-elective-W-2024", "year": 2024, "session": "Winter", "file": "/papers/open-elective/winter-2024.pdf", "fileSize": null },
-        { "id": "open-elective-W-2023", "year": 2023, "session": "Winter", "file": "/papers/open-elective/winter-2023.pdf", "fileSize": null },
-        { "id": "open-elective-W-2022", "year": 2022, "session": "Winter", "file": "/papers/open-elective/winter-2022.pdf", "fileSize": null }
-      ]
+      "papers": ""
     },
     {
       "id": "301IT",
@@ -50,23 +45,13 @@
       "id": "program-elective",
       "code": "",
       "name": "Program Elective – I",
-      "papers": [
-        { "id": "program-elective-W-2025", "year": 2025, "session": "Winter", "file": "/papers/program-elective/winter-2025.pdf", "fileSize": null },
-        { "id": "program-elective-W-2024", "year": 2024, "session": "Winter", "file": "/papers/program-elective/winter-2024.pdf", "fileSize": null },
-        { "id": "program-elective-W-2023", "year": 2023, "session": "Winter", "file": "/papers/program-elective/winter-2023.pdf", "fileSize": null },
-        { "id": "program-elective-W-2022", "year": 2022, "session": "Winter", "file": "/papers/program-elective/winter-2022.pdf", "fileSize": null }
-      ]
+      "papers": ""
     },
     {
       "id": "301ES",
       "code": "301ES",
       "name": "Design Thinking",
-      "papers": [
-        { "id": "301ES-W-2025", "year": 2025, "session": "Winter", "file": "/papers/301ES/winter-2025.pdf", "fileSize": null },
-        { "id": "301ES-W-2024", "year": 2024, "session": "Winter", "file": "/papers/301ES/winter-2024.pdf", "fileSize": null },
-        { "id": "301ES-W-2023", "year": 2023, "session": "Winter", "file": "/papers/301ES/winter-2023.pdf", "fileSize": null },
-        { "id": "301ES-W-2022", "year": 2022, "session": "Winter", "file": "/papers/301ES/winter-2022.pdf", "fileSize": null }
-      ]
+      "papers": ""
     },
     {
       "id": "301HS",
